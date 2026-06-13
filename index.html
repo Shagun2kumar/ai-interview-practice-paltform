@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Interview</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2>AI Interview</h2>
+    <a href="/dashboard_page">Dashboard</a>
+</div>
+
+<div class="container">
+
+    <!-- SETUP -->
+    <div class="card">
+        <h3>Setup Interview</h3>
+
+        <input type="file" id="file">
+
+        <select id="role">
+            <option value="technical">Technical</option>
+            <option value="non-technical">Non-Technical</option>
+        </select>
+
+        <button onclick="upload()">Upload Resume</button>
+        <button onclick="getQ()">Start</button>
+
+        <div id="res"></div>
+    </div>
+
+    <!-- QUESTION -->
+    <div class="card question-card">
+       <h3 id="timer">Time Left: 60s</h3>
+       <h3>💡 Question</h3>
+       <p id="q" class="question-text">Click Start to begin your interview</p>
+    </div>
+    <!-- ANSWER -->
+    <div class="card">
+        <textarea id="a" placeholder="Write your answer..."></textarea>
+
+       <div class="btn-row">
+                <button onclick="voice()">🎤 Answer</button>
+                <button onclick="submitAns()">Submit</button>
+                <button onclick="conf()">📊 Camera Confidence</button>
+                <button onclick="voiceConfidence()">🎙 Voice Confidence</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <button class="next-btn" onclick="nextQ()">Next Question →</button>
+
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+</html>
+

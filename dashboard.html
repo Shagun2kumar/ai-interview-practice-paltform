@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body><
+
+<div class="container">
+
+    <h1>📊 Interview Performance Dashboard</h1>
+
+    <!-- STATS -->
+    <div class="card-grid">
+
+        <div class="card">
+            <h3>Average Score</h3>
+            <h2 id="avg"></h2>
+        </div>
+
+        <div class="card">
+            <h3>Latest Score</h3>
+            <h2 id="latest"></h2>
+        </div>
+
+        <div class="card">
+            <h3>Highest Score</h3>
+            <h2 id="highest"></h2>
+        </div>
+
+        <div class="card">
+            <h3>Total Attempts</h3>
+            <h2 id="total"></h2>
+        </div>
+
+    </div>
+
+    <!-- LEVEL -->
+    <div class="card">
+        <h3>Performance Level</h3>
+        <h2 id="level"></h2>
+    </div>
+
+    <!-- FEEDBACK -->
+    <div class="card">
+        <h3>AI Feedback</h3>
+        <p id="feedback"></p>
+    </div>
+
+    <!-- SCORE HISTORY -->
+    <div class="card">
+        <h3>Score History</h3>
+        <ul id="scores"></ul>
+    </div>
+    <div class="card">
+    <h3>Performance Trend</h3>
+    <canvas id="scoreChart" height="120"></canvas>
+    </div>
+
+
+</div>
+
+<script>
+
+async function loadDashboard(){
+
+    let res = await fetch("/dashboard");
+    let data = await res.json();
+
+    document.getElementById("avg").innerText =
+        data.avg.toFixed(2);
+
+    document.getElementById("latest").innerText =
+        data.latest;
+
+    document.getElementById("highest").innerText =
+        data.highest;
+
+    document.getElementById("total").innerText =
+        data.total;
+
+    document.getElementById("level").innerText =
+        data.level;
+
+    document.getElementById("feedback").innerText =
+        data.feedback;
+
+    let list = document.getElementById("scores");
+    list.innerHTML = "";
+
+    data.scores.forEach((s, i) => {
+        let li = document.createElement("li");
+        li.innerText = "Attempt " + (i+1) + " : " + s;
+        list.appendChild(li);
+    });
+}
+
+loadDashboard();
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
